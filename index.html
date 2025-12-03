@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETS ALBARKA fruits - Commandez Votre Salade de Fruits Frais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* INDICATION IMAGE : Remplacer cette URL par l'URL de votre image de fond (motif discret de fruits) */
+            background-image: url('YOUR_FRUIT_BACKGROUND_IMAGE_URL'); 
+            background-repeat: repeat;
+            background-size: 200px; 
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .container-content {
+            background-color: rgba(255, 255, 255, 0.98); 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        /* Style pour l'overlay des fruits */
+        #fruits-overlay {
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+        }
+        #fruits-list-modal {
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="fruits-overlay" class="fixed inset-0 flex items-center justify-center">
+        <div id="fruits-list-modal" class="bg-white p-6 rounded-xl shadow-2xl transform transition-all duration-300">
+            <h4 class="text-2xl font-bold text-green-700 mb-4">Fruits du Jour 😋</h4>
+            <ul id="fruit-items" class="space-y-3 text-lg text-gray-700">
+                </ul>
+            <button onclick="closeFruitsModal()" class="mt-6 w-full py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition">Fermer</button>
+        </div>
+    </div>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 container-content max-w-5xl">
+
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 pb-4 border-b border-green-200">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-seedling text-3xl text-green-600"></i> 
+                <h1 class="text-3xl font-bold text-green-700">ETS ALBARKA fruits</h1>
+            </div>
+            
+            <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                <span class="text-lg font-semibold text-gray-700 hidden sm:inline-block">+228 90 37 79 78</span>
+                
+                <a href="https://wa.me/22890377978" target="_blank" rel="noopener noreferrer" 
+                   class="flex items-center px-4 py-2 bg-green-500 text-white rounded-full text-sm font-medium hover:bg-green-600 transition duration-300 shadow-lg">
+                    <i class="fab fa-whatsapp text-xl mr-2"></i>
+                    Commander par WhatsApp
+                </a>
+            </div>
+        </header>
+
+        <section class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+                Savourez la Fraîcheur : Commandez Votre Salade de Fruits  !
+            </h2>
+            <p class="mt-4 text-xl text-gray-600 max-w-4xl mx-auto">
+                Des créations uniques pour égayer vos journées, livrées directement chez vous.
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="salades" class="mb-12">
+            <h3 class="text-3xl font-bold text-green-700 mb-6 border-l-4 border-yellow-500 pl-3">Nos Salades de Fruits 🍍</h3>
+
+            <p class="text-gray-600 mb-4 text-center">
+                Cliquez sur un format pour voir les fruits disponibles aujourd'hui !
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div onclick="showFruitsModal('Format Individuel')" class="card bg-white rounded-xl shadow-md overflow-hidden text-center border-2 border-green-100 p-4">
+                    <img src="C:\Users\DELL\backend\image albarka\500.jpg" alt="Salade de fruits petite (500 FCFA)" class="h-40 w-full object-cover rounded-lg mb-4">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">PETITE</span>
+                    <p class="text-lg font-semibold text-gray-700 mt-2">Format Individuel</p>
+                    <div class="mt-3 bg-green-50 p-2 rounded-lg">
+                        <p class="text-2xl font-bold text-green-700">500 FCFA</p>
+                    </div>
+                </div>
+
+                <div onclick="showFruitsModal('Format Moyenne')" class="card bg-white rounded-xl shadow-md overflow-hidden text-center border-2 border-green-100 p-4">
+                    <img src="C:\Users\DELL\backend\image albarka\petit.jpg" alt="Salade de fruits moyenne (1000 FCFA)" class="h-40 w-full object-cover rounded-lg mb-4">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-orange-100 text-orange-800">MOYENNE</span>
+                    <p class="text-lg font-semibold text-gray-700 mt-2">Pour Deux</p>
+                    <div class="mt-3 bg-green-50 p-2 rounded-lg">
+                        <p class="text-2xl font-bold text-green-700">1000 FCFA</p>
+                    </div>
+                </div>
+
+                <div onclick="showFruitsModal('Format Grande')" class="card bg-white rounded-xl shadow-md overflow-hidden text-center border-2 border-green-100 p-4">
+                    <img src="C:\Users\DELL\backend\image albarka\moyen 1000.webp" alt="Salade de fruits grande (1500 FCFA)" class="h-40 w-full object-cover rounded-lg mb-4">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800">GRANDE</span>
+                    <p class="text-lg font-semibold text-gray-700 mt-2">À Partager</p>
+                    <div class="mt-3 bg-green-50 p-2 rounded-lg">
+                        <p class="text-2xl font-bold text-green-700">1500 FCFA</p>
+                    </div>
+                </div>
+
+                <div onclick="showFruitsModal('Format Familiale')" class="card bg-white rounded-xl shadow-md overflow-hidden text-center border-2 border-green-100 p-4">
+                    <img src="C:\Users\DELL\backend\image albarka\familiale.webp" alt="Salade de fruits familiale (2500 FCFA)" class="h-40 w-full object-cover rounded-lg mb-4">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">FAMILIALE</span>
+                    <p class="text-lg font-semibold text-gray-700 mt-2">Maxi Format</p>
+                    <div class="mt-3 bg-green-50 p-2 rounded-lg">
+                        <p class="text-2xl font-bold text-green-700">2500 FCFA</p>
+                    </div>
+                </div>
+
+            </div>
+            
+            <p class="text-sm text-center text-gray-500 mt-6">
+                Toutes nos salades sont préparées à la commande et servies dans des boîtes plastiques noires jetables.
+            </p>
+        </section>
+
+        <hr>
+
+        <section id="specialites" class="mt-12 p-6 bg-yellow-50 rounded-xl border border-yellow-200 text-center">
+            <h3 class="text-3xl font-bold text-yellow-800 mb-4 border-b-2 border-yellow-400 pb-2 inline-block">✨ Notre Spécialité : Yaourts aux Fruits</h3>
+            <p class="text-lg text-yellow-700 mb-6">
+                En plus de nos salades, découvrez nos délicieux yaourts aux fruits frais pour une touche gourmande et saine !
+            </p>
+            
+            <div class="flex justify-center space-x-4 mb-6">
+                <img src="C:\Users\DELL\backend\image albarka\yaourt-aux-fruits-1.webp" alt="Exemple de Yaourt aux fruits" class="h-40 w-full object-cover rounded-lg mb-4">
+                <img src="C:\Users\DELL\backend\image albarka\images yaourt 2.jpg" alt="Exemple de Yaourt aux fruits" class="h-40 w-full object-cover rounded-lg mb-4">
+            </div>
+
+            <div class="inline-block p-4 bg-white rounded-lg shadow-lg">
+                 <h4 class="text-xl font-bold text-gray-800">Pour commander ou en savoir plus :</h4>
+                 <a href="https://wa.me/22890377978" target="_blank" rel="noopener noreferrer" 
+                    class="mt-3 flex items-center justify-center mx-auto w-fit px-6 py-3 bg-yellow-500 text-white rounded-full text-base font-semibold hover:bg-yellow-600 transition duration-300">
+                     <i class="fab fa-whatsapp text-2xl mr-3"></i>
+                     Contactez-nous par WhatsApp !
+                 </a>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="contact" class="mt-12 p-6 bg-green-50 rounded-xl border border-green-200">
+            <h3 class="text-2xl font-bold text-green-800 mb-4">📞 Contact & Informations</h3>
+            <div class="grid md:grid-cols-2 gap-4 text-gray-700">
+                <div class="space-y-2">
+                    <p class="font-semibold text-lg flex items-center"><i class="fas fa-phone-alt mr-3 text-green-600"></i> Téléphones pour la Commande :</p>
+                    <ul class="list-disc list-inside ml-6 space-y-1">
+                        <li>+228 90 37 79 78</li>
+                        <li>+228 91 16 80 67</li>
+                    </ul>
+                </div>
+                <div class="space-y-2">
+                    <p class="font-semibold text-lg flex items-center"><i class="fab fa-whatsapp mr-3 text-green-600"></i> Contact WhatsApp Direct :</p>
+                    <a href="https://wa.me/22890377978" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline font-medium block">
+                        Cliquez ici : +228 90 37 79 78
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-6 pt-4 border-t border-green-200">
+                 <p class="text-lg font-bold text-gray-800 flex items-center"><i class="fas fa-motorcycle mr-3 text-green-600"></i> Service de Livraison</p>
+                 <p class="text-gray-600 mt-1">Livraisons possibles (frais de livraison applicables).</p>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <p class="text-sm text-gray-500">&copy; 2025 ETS ALBARKA fruits. Tous droits réservés.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Définition de la liste des fruits et de leurs émojis
+        const availableFruits = [
+            { name: "Mangues", emoji: "🥭" },
+            { name: "Orange", emoji: "🍊" },
+            { name: "Pastèque", emoji: "🍉" },
+            { name: "Ananas", emoji: "🍍" },
+            { name: "Banane", emoji: "🍌" },
+            { name: "Goyave", emoji: "🍐" },
+            { name: "Raisins", emoji: "🍇" },
+            { name: "Pomme", emoji: "🍎" },
+            { name: "Papaye", emoji: "🍈" },
+            { name: "Fraise", emoji: "🍓" },
+            { name: "Melon", emoji: "🍈"},
+            { name: "Kiwi", emoji: "🥝" }
+        ];
+
+        const fruitsOverlay = document.getElementById('fruits-overlay');
+        const fruitsList = document.getElementById('fruit-items');
+        const modalTitle = document.querySelector('#fruits-list-modal h4');
+
+        function showFruitsModal(formatName) {
+            // Afficher le titre du modal (optionnel, si vous voulez le personnaliser par format)
+            // modalTitle.textContent = `Fruits disponibles pour le ${formatName} aujourd'hui !`;
+
+            // Vider la liste actuelle
+            fruitsList.innerHTML = '';
+            
+            // Créer et insérer les éléments de la liste
+            availableFruits.forEach(fruit => {
+                const listItem = document.createElement('li');
+                // Utilisez un span pour aligner l'émoji et le texte
+                listItem.innerHTML = `<span class="mr-2">${fruit.emoji}</span> ${fruit.name}`;
+                fruitsList.appendChild(listItem);
+            });
+
+            // Afficher le modal
+            fruitsOverlay.style.display = 'flex';
+        }
+
+        function closeFruitsModal() {
+            // Cacher le modal
+            fruitsOverlay.style.display = 'none';
+        }
+
+        // Pour permettre de fermer le modal en cliquant en dehors
+        fruitsOverlay.addEventListener('click', (e) => {
+            if (e.target.id === 'fruits-overlay') {
+                closeFruitsModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
